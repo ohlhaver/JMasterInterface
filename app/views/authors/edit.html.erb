@@ -1,0 +1,29 @@
+<h1>Edit Author</h1>
+
+<% form_for( @author, :url => author_path(@author) ) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :is_agency %><br />
+    <%= f.check_box :is_agency %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<h2>Author Aliases</h2>
+
+<ul id="author_aliases">
+<% @author.aliases.each do |author_alias| %>
+  <% @author_alias = author_alias %>
+  <%= render :partial => 'author_aliases/show' %>
+<% end %>
+</ul>
+
+<h2>New Author Alias</h2>
+<% @author_alias = AuthorAlias.new(:author_id => @author.id) %>
+<%= render :partial => 'author_aliases/form' %>

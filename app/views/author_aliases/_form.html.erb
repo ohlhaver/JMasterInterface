@@ -1,0 +1,13 @@
+<% if @author_alias.new_record? %>
+<% remote_form_for( @author_alias ) do |f| %>
+  <%= f.text_field :name %> <%= f.error_message_on(:name) %> <%= "<span class='notice'>#{@success}</span>" if @success %> <br/>
+  <%= f.hidden_field :author_id %>
+  <%= f.submit 'Create' %>
+<% end %>
+<% else %>
+<% remote_form_for( @author_alias ) do |f| %>
+  <%= f.text_field :name %> <%= f.error_message_on(:name) %> <%= "<span class='notice'>#{@success}</span>" if @success %> <br/>
+  <%= f.submit 'Update' %>
+  <%= link_to_remote( 'Delete', :url => author_alias_path(@author_alias), :method => 'delete', :confirm => 'Are you sure?') %>
+<% end %>
+<% end %>

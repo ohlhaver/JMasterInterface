@@ -1,0 +1,39 @@
+<h1>Author: <%= @author.name -%></h1>
+
+<%= @author.aliases.collect{ |x| x.name }.join('<br/>') %>
+<br/>
+
+<h2> Merge Author </h2>
+<div id="search">
+  <% form_tag( merge_author_path(@author), :method => :get ) do -%>
+    <%= text_field_tag( :s, params[:s] ) %> &nbsp; <%= check_box_tag( :a, '1', params[:a] == '1' ) %> Agencies? &nbsp; &nbsp; <%= submit_tag 'Search' %>
+  <% end -%>
+</div>
+<br/>
+<% form_tag( merge_author_path(@author), :method => :post) do -%>
+<table>
+  <tr>
+    <th>Merge</th>
+    <th>Name</th>
+    <th>Agency</th>
+    <th>Story Count</th>
+    <th>Alias Count</th>
+    <th>Aliases</th>
+  </tr>
+<% @authors.each do |author| %>
+  <tr>
+    <td><%= check_box_tag( 'author_ids[]', author.id, false ) %></td>
+    <td><%= author.name %></td>
+    <td><%= author.is_agency? ? 'YES' : 'NO' %></td>
+    <td><%= @story_counts[ author.id ] || 0 %></td>
+    <td><%= author.aliases.size %></td>
+    <td><%= author.aliases.collect{ |x| x.name }.join('<br/>') %></td>
+  </tr>
+<% end %>
+</table>
+<%= submit_tag 'Merge' %>
+<% end -%>
+
+<br />
+<%= will_paginate @authors %>
+<br />
