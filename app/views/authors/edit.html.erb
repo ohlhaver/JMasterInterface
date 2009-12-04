@@ -32,4 +32,4 @@
 <% @author_alias = AuthorAlias.new(:author_id => @author.id) %>
 <%= render :partial => 'author_aliases/form' %>
 <br/>
-<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Merge', merge_author_path(@author) %>
+<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Merge', merge_author_path(@author) %> | <%= link_to 'Author Stories', author_path( @author ) %>

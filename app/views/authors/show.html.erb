@@ -15,5 +15,4 @@
 <%= will_paginate @stories %>
 <br />
 
-<%= link_to 'Merge', merge_author_path( @author ) %>
-| <%= link_to 'Author Index', authors_path %>
+<%= link_to 'Author Index', authors_path %> | <%= link_to 'Merge', merge_author_path( @author ) %> | <%= link_to 'Edit', edit_author_path( @author ) %>

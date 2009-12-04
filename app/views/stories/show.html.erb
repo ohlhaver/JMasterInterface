@@ -2,7 +2,7 @@
 
 <% if @story.authors.any? %>
   <h3>Authors</h3>
-  <p><%= @story.authors.collect{ |a| link_to a.name, edit_author_path(a) }.join(', ') %></p>
+  <p><%= @story.authors.collect{ |a| link_to a.name, author_path(a) }.join(', ') %></p>
 <% end %>
 
 <h3>Content</h3>

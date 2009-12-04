@@ -24,6 +24,7 @@
     <td><%= author.aliases.collect{ |x| x.name }.join('<br/>') %></td>
     <td><%= link_to 'Edit', edit_author_path( author ) %></td>
     <td><%= link_to 'Merge', merge_author_path( author ) %></td>
+    <td><%= link_to 'Stories', author_path( author ) %></td>
   </tr>
 <% end %>
 </table>
