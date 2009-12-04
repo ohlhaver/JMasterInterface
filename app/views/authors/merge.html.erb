@@ -2,6 +2,8 @@
 
 <%= @author.aliases.collect{ |x| x.name }.join('<br/>') %>
 <br/>
+<%= link_to 'Stories', author_path( @author ) %>
+<br/>
 
 <h2> Merge Author </h2>
 <div id="search">
@@ -29,6 +31,7 @@
     <td><%= @story_counts[ author.id ] || 0 %></td>
     <td><%= author.aliases.size %></td>
     <td><%= author.aliases.collect{ |x| x.name }.join('<br/>') %></td>
+    <td><%= link_to 'Stories', author_path( author ) %></td>
   </tr>
 <% end %>
 </table>
