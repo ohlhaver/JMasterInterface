@@ -21,9 +21,10 @@
     <th>Aliases</th>
   </tr>
 <% @authors.each do |author| %>
+  <% next if author.nil? %>
   <tr>
     <td><%= check_box_tag( 'author_ids[]', author.id, false ) %></td>
-    <td><%= author.name %></td>
+    <td><%= link_to author.name, merge_author_path( :id => author, :s => params[:s] ) %></td>
     <td><%= author.is_agency? ? 'YES' : 'NO' %></td>
     <td><%= @story_counts[ author.id ] || 0 %></td>
     <td><%= author.aliases.size %></td>
@@ -37,3 +38,4 @@
 <br />
 <%= will_paginate @authors %>
 <br />
+<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Edit', edit_author_path(@author) %>

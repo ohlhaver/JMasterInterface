@@ -15,6 +15,7 @@
     <th>Aliases</th>
   </tr>
 <% @authors.each do |author| %>
+  <% next if author.nil? %>
   <tr>
     <td><%= author.name %></td>
     <td><%= author.is_agency? ? 'YES' : 'NO' %></td>

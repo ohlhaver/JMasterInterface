@@ -1,0 +1,24 @@
+<h1>Story Groups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Language</th>
+    <th>Top Keywords</th>
+    <th>Story Count</th>
+    <th>Broadness Value</th>
+  </tr>
+<% @story_groups.each do |story_group| %>
+  <tr>
+    <td><%= story_group.top_story.title %></td>
+    <td><%= story_group.language.code %></td>
+    <td><%= story_group.top_keywords.join(' ') %></td>
+    <td><%= story_group.stories.count %></td>
+    <td><%= story_group.broadness_score %></td>
+    <td><%= link_to 'Stories', story_group_path( story_group ) %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= will_paginate @story_groups %>
+<br />

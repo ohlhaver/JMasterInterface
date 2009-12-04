@@ -1,0 +1,11 @@
+<h1><%= @story.title %></h1>
+
+<% if @story.authors.any? %>
+  <h3>Authors</h3>
+  <p><%= @story.authors.collect{ |a| link_to a.name, edit_author_path(a) }.join(', ') %></p>
+<% end %>
+
+<h3>Content</h3>
+<p><%= @story.story_content.body %></p>
+
+<%= link_to( 'StoryGroup', story_group_path( @group ) )if @group %>

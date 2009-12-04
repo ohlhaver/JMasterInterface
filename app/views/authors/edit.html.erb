@@ -11,6 +11,10 @@
     <%= f.check_box :is_agency %>
   </p>
   <p>
+    <%= label_tag( 'author', 'Story Count') %><br/>
+    <strong><%= @author.story_authors.count %></strong>
+  </p>
+  <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
@@ -27,3 +31,5 @@
 <h2>New Author Alias</h2>
 <% @author_alias = AuthorAlias.new(:author_id => @author.id) %>
 <%= render :partial => 'author_aliases/form' %>
+<br/>
+<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Merge', merge_author_path(@author) %>
