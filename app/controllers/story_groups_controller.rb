@@ -1,5 +1,7 @@
 class StoryGroupsController < ApplicationController
   
+  layout 'scaffold'
+  
   def index
     @story_groups = StoryGroup.current_session.paginate( :page => params[:page] || '1', :include => [ :language, :top_story ] )
   end

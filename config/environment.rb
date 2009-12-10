@@ -13,7 +13,11 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
-
+  config.gem( 'authlogic', :version => '2.1.3', :lib => 'authlogic' )
+  config.gem( 'rubycas-client', :version => '2.1.0' )
+  require 'casclient'
+  require 'casclient/frameworks/rails/filter'
+  
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
@@ -46,3 +50,19 @@ load "#{JModelConfig[RAILS_ENV]['path']}/config/environment.rb"
 Dir["#{RAILS_ROOT}/app/models/*.rb"].each do |model_file|
   load model_file
 end
+
+CasServerConfig = YAML.load_file( "#{RAILS_ROOT}/config/cas_server.yml" )
+
+cas_logger = Logger.new(RAILS_ROOT+'/log/cas.log')
+cas_logger.level = ActiveRecord::Base.logger.level
+
+CASClient::Frameworks::Rails::Filter.configure(
+  :cas_base_url => CasServerConfig[RAILS_ENV]['cas_server'],
+  :username_session_key => :cas_user,
+  :extra_attributes_session_key => :cas_extra_attributes,
+  :logger => cas_logger,
+  :authenticate_on_every_request => false # true will load cas server heavily
+)
+
+
+
