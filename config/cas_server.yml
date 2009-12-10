@@ -4,4 +4,4 @@ development:
     
 production:
   service: http://174.143.171.52
-  cas_server: https://174.153.169.37
+  cas_server: https://174.143.169.37
