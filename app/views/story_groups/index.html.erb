@@ -11,7 +11,7 @@
 <% @story_groups.each do |story_group| %>
   <tr>
     <td><%= story_group.top_story.title %></td>
-    <td><%= story_group.language.code %></td>
+    <td><%= story_group.language.try(:code) %></td>
     <td><%= story_group.top_keywords.join(' ') %></td>
     <td><%= story_group.stories.count %></td>
     <td><%= story_group.broadness_score %></td>
