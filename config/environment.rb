@@ -47,11 +47,13 @@ end
 JModelConfig = YAML.load_file( "#{RAILS_ROOT}/config/j_models.yml" )
 load "#{JModelConfig[RAILS_ENV]['path']}/config/environment.rb"
 
-Dir["#{RAILS_ROOT}/app/models/*.rb"].each do |model_file|
-  load model_file
-end
+# Dir["#{RAILS_ROOT}/app/models/*.rb"].each do |model_file|
+#   load model_file
+# end
+I18n.reload!
 
 CasServerConfig = YAML.load_file( "#{RAILS_ROOT}/config/cas_server.yml" )
+AccountServer = CasServerConfig[RAILS_ENV]['account_server']
 
 cas_logger = Logger.new(RAILS_ROOT+'/log/cas.log')
 cas_logger.level = ActiveRecord::Base.logger.level

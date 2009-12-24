@@ -1,0 +1,19 @@
+<h2>Default Source Preferences</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Preference</th>
+  </tr>
+  <% @sources.each do |source| %>
+    <tr>
+      <% form_for( source, :url => source_path(source) ) do |f| %>
+      <td><%= source.name %></td>
+      <td><%= f.select( :default_preference, Preference.for_select( :source ), :include_blank => true ) %></td>
+      <td><%= f.submit('Update') %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<%= will_paginate @sources %>

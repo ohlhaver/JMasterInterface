@@ -45,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   map.dashboard '/dashboard', :controller => 'dashboard', :action => 'index'
   map.resources :story_groups
   map.resources :stories
+  map.resources :sources
   map.resources :author_aliases
   map.resources :authors, :member => { :merge => :any }
   map.connect ':controller/:action/:id'

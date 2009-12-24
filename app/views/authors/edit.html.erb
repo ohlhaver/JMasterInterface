@@ -11,6 +11,9 @@
     <%= f.check_box :is_agency %>
   </p>
   <p>
+    <%= f.label :is_opinion %><br />
+    <%= f.check_box :is_opinion %>
+  <p>
     <%= label_tag( 'author', 'Story Count') %><br/>
     <strong><%= @author.story_authors.count %></strong>
   </p>
