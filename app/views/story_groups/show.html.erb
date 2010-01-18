@@ -3,11 +3,13 @@
   <tr>
     <th>Title</th>
     <th>Source</th>
+    <th>Duplicate?</th>
   </tr>
 <% @stories.each do |story| %>
   <tr>
     <td><%= link_to story.title, story_path(story) %></td>
     <td><%= story.source.name %></td>
+    <td><%= !story.story_metric.master_id.nil? %></td>
   </tr>
 <% end %>
 </table>
