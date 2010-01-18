@@ -9,7 +9,7 @@ class StoryGroupsController < ApplicationController
 
   def show
     @story_group = StoryGroup.find( params[:id] )
-    @stories = @story_group.stories.paginate( :page => params[:page] || '1', :include => :story_metric )
+    @stories = @story_group.stories.paginate( :page => params[:page] || '1', :include => [ :story_metric, :source ] )
   end
 
 end
