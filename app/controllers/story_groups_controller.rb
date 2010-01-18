@@ -4,7 +4,7 @@ class StoryGroupsController < ApplicationController
   
   def index
     @story_groups = StoryGroup.current_session.paginate( :page => params[:page] || '1', :include => [ :language ] )
-    populate_stories_to_serialize( nil, @story_groups, 1) 
+    StoryGroup.populate_stories_to_serialize( nil, @story_groups, 1) 
   end
 
   def show
