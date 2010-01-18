@@ -9,7 +9,7 @@
   <tr>
     <td><%= link_to story.title, story_path(story) %></td>
     <td><%= story.source.name %></td>
-    <td><%= !story.story_metric.master_id.nil? %></td>
+    <td><%= !story.story_metric.try(:master_id).nil? %></td>
   </tr>
 <% end %>
 </table>
