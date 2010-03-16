@@ -3,13 +3,13 @@
   <tr>
     <th>Title</th>
     <th>Source</th>
-    <th>Duplicate?</th>
+    <th>Duplicates</th>
   </tr>
 <% @stories.each do |story| %>
   <tr>
     <td><%= link_to story.title, story_path(story) %></td>
     <td><%= story.source.try(:name) || "Source##{story.source_id} Out of Sync" %></td>
-    <td><%= !story.story_metric.try(:master_id).nil? %></td>
+    <td><%= @duplicates[story.id] ? "#{@duplicates[story.id]} duplicates" : 'None' %></td>
   </tr>
 <% end %>
 </table>

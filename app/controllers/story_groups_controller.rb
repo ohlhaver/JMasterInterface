@@ -8,8 +8,11 @@ class StoryGroupsController < ApplicationController
   end
 
   def show
-    @story_group = StoryGroup.find( params[:id] )
-    @stories = @story_group.stories.paginate( :page => params[:page] || '1', :include => [ :story_metric, :source ] )
+    @story_group = StoryGroup.find( params[:id] ) rescue StoryGroupArchive.find( params[:id] )
+    @stories = @story_group.stories.paginate( :page => params[:page] || '1', :include => [ :source ] )
+    @duplicates = StoryMetric.find(:all, :select => 'master_id, COUNT(*) AS count', :conditions => { :master_id => @stories.collect(&:id) }, :group => :master_id).inject({}){
+      |s,x| s.merge!( x.master_id => x.send(:read_attribute, count ))
+    }
   end
 
 end

@@ -5,7 +5,26 @@
   <p><%= @story.authors.collect{ |a| link_to a.name, author_path(a) }.join(', ') %></p>
 <% end %>
 
+<h3>Source</h3>
+<p><%= @story.source.try(:name) || "Source##{story.source_id} Out of Sync" %></p>
+
 <h3>Content</h3>
 <p><%= @story.story_content.body %></p>
+
+<% if @duplicates.any? %>
+<h3>Duplicates</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Source</th>
+  </tr>
+<% @duplicates.each do |story| %>
+  <tr>
+    <td><%= link_to story.title, story_path(story) %></td>
+    <td><%= story.source.try(:name) || "Source##{story.source_id} Out of Sync" %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
 
 <%= link_to( 'StoryGroup', story_group_path( @group ) )if @group %>
