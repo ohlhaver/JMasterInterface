@@ -1,13 +1,24 @@
 <h2>Default Source Preferences</h2>
+
+<div id="search">
+  <% form_tag( sources_path, :method => :get ) do -%>
+    <%= text_field_tag( :s, session[:s] ) %> &nbsp; &nbsp; <%= submit_tag 'Search' %>
+  <% end -%>
+</div>
+
 <table>
   <tr>
     <th>Name</th>
-    <th>Preference</th>
+    <th>Count</th>
+    <th>Average</th>
+    <th>Default</th>
   </tr>
   <% @sources.each do |source| %>
     <tr>
       <% form_for( source, :url => source_path(source) ) do |f| %>
       <td><%= source.name %></td>
+      <td><%= source.source_subscriptions.count %></td>
+      <td><%= sprintf("%1.2f", source.source_subscriptions.average( :preference ).to_f ) %>
       <td><%= f.select( :default_preference, Preference.for_select( :source ), :include_blank => true ) %></td>
       <td><%= f.submit('Update') %></td>
       <% end %>
