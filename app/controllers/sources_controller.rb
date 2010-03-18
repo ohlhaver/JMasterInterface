@@ -6,7 +6,7 @@ class SourcesController < ApplicationController
     back = params.delete(:back)
     session[:page] = ( back == '1' ? nil : (params[:page] || 1) ) || session[:page] || 1
     session[:s] = ( back == '1' ? nil : (params[:s] || '') ) || session[:s]
-    pagination_options = { :page => session[:page], :per_page => 100, :order => 'default_rating DESC' }
+    pagination_options = { :page => session[:page], :per_page => 100, :order => 'sources.default_preference DESC, sources.name ASC', :include => [ :source_subscriptions ] }
     @sources = session[:s].blank? ? Source.paginate( pagination_options ) :
       Source.name_like( session[:s] ).paginate( pagination_options )
   end
