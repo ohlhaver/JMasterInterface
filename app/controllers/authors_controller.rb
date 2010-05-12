@@ -8,6 +8,15 @@ class AuthorsController < ApplicationController
     @story_counts = StoryAuthor.count(:all, :conditions => { :author_id => @authors.collect{ |x| x.try(:id) }  }, :group => 'author_id' )
   end
   
+  def todos
+    @priority_authors = PriorityAuthor.paginate( :page => params[:page] || 1, :conditions => { :checked => false }, :order => 'updated_at DESC', :include => :author )
+  end
+  
+  def check
+    PriorityAuthor.checked( params[:id] )
+    redirect_to request.referer || { :action => :todos }
+  end
+  
   def show
     @author = Author.find( params[:id] )
     @stories = Story.search( :with => { :author_ids => @author.id }, :page => params[:page] || 1, :include => :source )
