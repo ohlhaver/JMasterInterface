@@ -13,6 +13,11 @@
   <p>
     <%= f.label :is_opinion %><br />
     <%= f.check_box :is_opinion %>
+  </p>
+  <p>
+    <%= f.label :block, 'Blocked?' %>
+    <%= @author.block? ? 'Yes' : 'No' %>
+  </p>
   <p>
     <%= label_tag( 'author', 'Story Count') %><br/>
     <strong><%= @author.story_authors.count %></strong>
@@ -35,4 +40,10 @@
 <% @author_alias = AuthorAlias.new(:author_id => @author.id) %>
 <%= render :partial => 'author_aliases/form' %>
 <br/>
-<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Merge', merge_author_path(@author) %> | <%= link_to 'Author Stories', author_path( @author ) %>
+<%= link_to 'Author Index', authors_path -%> | <%= link_to 'Author Merge', merge_author_path(@author) %> | 
+<% if @author.block? %>
+<%= link_to 'Unblock', unblock_author_path( @author ) %>
+<% else %>
+<%= link_to 'Block', block_author_path( @author ) %>
+<% end %> |
+<%= link_to 'Author Stories', author_path( @author ) %>

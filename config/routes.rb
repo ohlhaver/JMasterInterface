@@ -47,7 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :stories
   map.resources :sources
   map.resources :author_aliases
-  map.resources :authors, :member => { :merge => :any, :check => :any }, :collection => [ :todos ]
+  map.resources :authors, :member => { :merge => :any, :check => :any, :block => :any, :unblock => :any }, :collection => [ :todos ]
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

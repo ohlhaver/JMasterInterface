@@ -12,6 +12,18 @@ class AuthorsController < ApplicationController
     @priority_authors = PriorityAuthor.paginate( :page => params[:page] || 1, :conditions => { :checked => false }, :order => 'updated_at DESC', :include => :author )
   end
   
+  def block
+    @author = Author.find( params[:id] )
+    @author.block!
+    redirect_to request.referer || { :action => :index }
+  end
+  
+  def unblock
+    @author = Author.find( params[:id] )
+    @author.unblock!
+    redirect_to request.referer || { :action => :index }
+  end
+  
   def check
     PriorityAuthor.checked( params[:id] )
     redirect_to request.referer || { :action => :todos }

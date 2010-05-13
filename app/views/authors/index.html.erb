@@ -9,6 +9,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Blocked</th>
     <th>Agency</th>
     <th>Story Count</th>
     <th>Alias Count</th>
@@ -18,12 +19,18 @@
   <% next if author.nil? %>
   <tr>
     <td><%= author.name %></td>
+    <td><%= author.block? ? 'YES' : 'NO' %></td>
     <td><%= author.is_agency? ? 'YES' : 'NO' %></td>
     <td><%= @story_counts[ author.id ] || 0 %></td>
     <td><%= author.aliases.size %></td>
     <td><%= author.aliases.collect{ |x| x.name }.join('<br/>') %></td>
     <td><%= link_to 'Edit', edit_author_path( author ) %></td>
     <td><%= link_to 'Merge', merge_author_path( author ) %></td>
+    <% if author.block? %>
+      <td><%= link_to 'Unblock', unblock_author_path( author ) %></td>
+    <% else %>
+      <td><%= link_to 'Block', block_author_path( author ) %></td>
+    <% end %>
     <td><%= link_to 'Stories', author_path( author ) %></td>
   </tr>
 <% end %>

@@ -11,6 +11,11 @@
     <td><%= link_to 'Checked', check_author_path( author ) %></td>
     <td><%= link_to 'Edit', edit_author_path( author ) %></td>
     <td><%= link_to 'Merge', merge_author_path( author ) %></td>
+    <% if author.block? %>
+      <td><%= link_to 'Unblock', unblock_author_path( author ) %></td>
+    <% else %>
+      <td><%= link_to 'Block', block_author_path( author ) %></td>
+    <% end %>
     <td><%= link_to 'Stories', author_path( author ) %></td>
   </tr>
 <% end %>
