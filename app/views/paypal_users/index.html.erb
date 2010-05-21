@@ -1,0 +1,30 @@
+<h2>User Listing</h2>
+
+<table>
+  <tr>
+    <th>Jurnalo Id</th>
+    <th>Login</th>
+    <th>Name</th>
+    <th>Subscription Status</th>
+    <th>Transaction Id</th>
+    <th>Payment Status</th>
+    <th>Starts At</th>
+    <th>Ends At</th>
+  </tr>
+  <% @paid_by_paypals.each do |pp| %>
+  <% next if pp.user.nil? %>
+  <tr>
+    <td><%= pp.id %></td>
+    <td><%= pp.user.login %></td>
+    <td><%= pp.name %></td>
+    <td><%= pp.subscription_status %></td>
+    <td><%= pp.transaction_id %></td>
+    <td><%= pp.payment_status %></td>
+    <td><%= pp.starts_at.to_date.to_s(:long) %></td>
+    <td><%= pp.ends_at.to_date.to_s(:long) %></td>
+    <td><%= link_to 'Profile', "#{AccountServer}/users/#{pp.user_id}" %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @paid_by_paypals %>
