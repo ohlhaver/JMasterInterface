@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :paypal_users
   map.resources :sources
   map.resources :author_aliases
+  map.resources :author_blacklists
   map.resources :authors, :member => { :merge => :any, :check => :any, :block => :any, :unblock => :any }, :collection => [ :todos ]
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

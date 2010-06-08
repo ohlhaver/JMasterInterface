@@ -1,0 +1,16 @@
+<h1>Author Blacklists</h1>
+<table>
+  <tr><th>Keyword</th></tr>
+  <% @blacklists.each do |blacklist| %>
+  <tr><td><%= blacklist.keyword %></td>
+    <td><%= link_to 'Destroy', blacklist, :method => :delete, :confirm => 'Are you sure?' %></td>
+  </tr>
+  <% end %>
+</table>
+<br />
+<%= will_paginate @blacklists %>
+<br />
+<% form_for @blacklist do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.submit( 'Add') %>
+<% end %>
