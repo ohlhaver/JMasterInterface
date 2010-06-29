@@ -1,0 +1,14 @@
+<h2>New Paid User</h2>
+<% form_for( @paid_by_paypal, :url => paypal_users_path ) do |f| %>
+  <%= f.error_messages %>
+  <table>
+    <tr><td>Jurnalo Id*:</td><td><%= f.text_field( :user_id ) %></td></tr>
+    <tr><td>Transaction Id*:</td><td><%= f.text_field( :transaction_id ) %></td></tr>
+    <tr><td>Name</td><td><%= f.text_field( :name )%></td></tr>
+    <tr><td>Plan:</td><td><%= f.select( :plan_name, ['1 month', '3 months', '6 months', '12 months'] ) %></td></tr>
+    <tr><td>Starts At:</td><td><%= f.date_select( :starts_at ) %></td></tr>
+  </table>
+  <%= f.submit( 'Create') %>
+<% end %>
+<br/><br/>
+<%= link_to 'Paypal Users', paypal_users_path %>
