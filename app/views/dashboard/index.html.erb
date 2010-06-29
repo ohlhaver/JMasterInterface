@@ -1,5 +1,4 @@
 <h1>JMaster Dashboard</h1>
-
 <ol>
   <li> <%= link_to 'Sources', sources_path %> </li>
   <li> <%= link_to 'Authors', authors_path %> </li>
@@ -8,4 +7,9 @@
   <li> <%= link_to 'Users', "#{AccountServer}/users", :target => '_BLANK' %> </li>
   <li> <%= link_to 'PayPal Users', paypal_users_path %> </li>
   <li> <%= link_to 'Story Groups', story_groups_path %> </li>
+</ol>
+<h2>Background Processes</h2>
+<ol>
+  <li>Duplicate Checker Queue:  <%= @duplicate_checker_queue_size %> </li>
+  <li>Story Quality Ratings Processor: <%= @quality_ratings_queue_size %> </li>
 </ol>
